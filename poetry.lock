@@ -601,13 +601,13 @@ gmpy2 = ["gmpy2"]
 
 [[package]]
 name = "embit"
-version = "0.4.9"
+version = "0.7.0"
 description = "yet another bitcoin library"
 category = "main"
 optional = false
 python-versions = "*"
 files = [
-    {file = "embit-0.4.9.tar.gz", hash = "sha256:992332bd89af6e2d027e26fe437eb14aa33997db08c882c49064d49c3e6f4ab9"},
+    {file = "embit-0.7.0.tar.gz", hash = "sha256:3dbd42582b5c3e40623e7b2af02956ba6019f6e1ca1c3363f27aa9f9bca03366"},
 ]
 
 [[package]]
@@ -2359,4 +2359,4 @@ testing = ["flake8 (<5)", "func-timeout", "jaraco.functools", "jaraco.itertools"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10 | ^3.9"
-content-hash = "57f400dcbe045847d741d5291a0bc92a3b8cfd2af18970e370a8685087d45a39"
+content-hash = "ed527121291cfbb30c08ba9575bbecd665998d0279282a0ebd883f295a91f279"
