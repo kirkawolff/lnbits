@@ -99,8 +99,10 @@ environ["GRPC_SSL_CIPHER_SUITES"] = "HIGH+ECDSA"
 
 class LndWallet(Wallet):
     def __init__(self):
-        global imports_ok
-        if not imports_ok:  # pragma: nocover
+        try:
+            import grpc
+            from grpc import RpcError
+        except ImportError:  # pragma: nocover
             raise ImportError(
                 "The `grpcio` and `protobuf` library must be installed to use `GRPC LndWallet`. Alternatively try using the LndRESTWallet."
             )

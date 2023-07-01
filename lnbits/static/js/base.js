@@ -391,7 +391,7 @@ window.windowMixin = {
     ) {
       this.$q.dark.set(this.$q.localStorage.getItem('lnbits.darkMode'))
     } else {
-      this.$q.dark.set(true)
+      this.$q.dark.set(false)
     }
     this.g.allowedThemes = window.allowedThemes ?? ['bitcoin']
 
