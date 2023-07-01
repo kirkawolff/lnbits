@@ -262,3 +262,7 @@ class TinyURL(BaseModel):
 class CreateTopup(BaseModel):
     wallet_id: str
     amount: int
+
+
+class CreateLnurlAuth(BaseModel):
+    callback: str

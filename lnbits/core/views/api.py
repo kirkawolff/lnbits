@@ -32,7 +32,7 @@ from lnbits.core.helpers import (
     migrate_extension_database,
     stop_extension_background_work,
 )
-from lnbits.core.models import Payment, PaymentFilters, User, Wallet
+from lnbits.core.models import CreateLnurlAuth, Payment, PaymentFilters, User, Wallet
 from lnbits.db import Filters, Page
 from lnbits.decorators import (
     WalletTypeInfo,
@@ -652,15 +652,11 @@ async def api_payments_decode(data: DecodePayment, response: Response):
         return {"message": "Failed to decode"}
 
 
-class Callback(BaseModel):
-    callback: str = Query(...)
-
-
 @core_app.post("/api/v1/lnurlauth")
 async def api_perform_lnurlauth(
-    callback: Callback, wallet: WalletTypeInfo = Depends(require_admin_key)
+    data: CreateLnurlAuth, wallet: WalletTypeInfo = Depends(require_admin_key)
 ):
-    err = await perform_lnurlauth(callback.callback, wallet=wallet)
+    err = await perform_lnurlauth(data.callback, wallet=wallet)
     if err:
         raise HTTPException(
             status_code=HTTPStatus.SERVICE_UNAVAILABLE, detail=err.reason
