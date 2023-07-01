@@ -111,6 +111,7 @@ pre-commit:
 	poetry run pre-commit run --all-files
 
 create-clients:
+	LNBITS_TITLE="lnbits client" \
 	LNBITS_BACKEND_WALLET_CLASS="FakeWallet" \
 	LNBITS_DATA_FOLDER="./tests/data" \
 	PYTHONUNBUFFERED=1 \

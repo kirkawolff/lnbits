@@ -62,7 +62,7 @@ from .tasks import (
 def create_app() -> FastAPI:
     configure_logger()
     app = FastAPI(
-        title=settings.title,
+        title=settings.lnbits_title,
         description="API for LNbits, the free and open source bitcoin wallet and accounts system with plugins.",
         version=settings.version,
         license_info={
