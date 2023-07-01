@@ -1,6 +1,4 @@
 #!/bin/sh
-
-PWD=$(pwd)
 for client_dir in $(find clients -mindepth 1 -maxdepth 1 -type d) ; do
     cd $client_dir
     client_repo=$(echo $client_dir | sed "s|clients/|client-|g")
