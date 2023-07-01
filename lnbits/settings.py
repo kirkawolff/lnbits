@@ -263,6 +263,7 @@ class EnvSettings(LNbitsSettings):
     lnbits_commit: str = Field(default="unknown")
     super_user: str = Field(default="")
     version: str = Field(default="0.0.0")
+    title: str = Field(default="LNbits API")
 
 
 class SaaSSettings(LNbitsSettings):

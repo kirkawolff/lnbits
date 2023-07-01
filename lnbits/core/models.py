@@ -257,3 +257,8 @@ class TinyURL(BaseModel):
     @classmethod
     def from_row(cls, row: Row):
         return cls(**dict(row))
+
+
+class CreateTopup(BaseModel):
+    wallet_id: str
+    amount: int

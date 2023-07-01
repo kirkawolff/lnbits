@@ -6,12 +6,12 @@ from subprocess import Popen
 from typing import Optional
 from urllib.parse import urlparse
 
-from fastapi import Body, Depends
+from fastapi import Depends
 from fastapi.responses import FileResponse
 from starlette.exceptions import HTTPException
 
 from lnbits.core.crud import get_wallet
-from lnbits.core.models import User
+from lnbits.core.models import CreateTopup, User
 from lnbits.core.services import (
     get_balance_delta,
     update_cached_settings,
@@ -86,14 +86,13 @@ async def api_restart_server() -> dict[str, str]:
 
 @core_app.put(
     "/admin/api/v1/topup/",
+    name="Topup",
     status_code=HTTPStatus.OK,
     dependencies=[Depends(check_super_user)],
 )
-async def api_topup_balance(
-    id: str = Body(...), amount: int = Body(...)
-) -> dict[str, str]:
+async def api_topup_balance(data: CreateTopup) -> dict[str, str]:
     try:
-        await get_wallet(id)
+        await get_wallet(data.wallet_id)
     except:
         raise HTTPException(
             status_code=HTTPStatus.FORBIDDEN, detail="wallet does not exist."
@@ -104,7 +103,7 @@ async def api_topup_balance(
             status_code=HTTPStatus.FORBIDDEN, detail="VoidWallet active"
         )
 
-    await update_wallet_balance(wallet_id=id, amount=int(amount))
+    await update_wallet_balance(wallet_id=data.wallet_id, amount=int(data.amount))
 
     return {"status": "Success"}
 
