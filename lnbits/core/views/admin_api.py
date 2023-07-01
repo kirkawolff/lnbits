@@ -25,7 +25,12 @@ from .. import core_app, core_app_extra
 from ..crud import delete_admin_settings, get_admin_settings, update_admin_settings
 
 
-@core_app.get("/admin/api/v1/audit", dependencies=[Depends(check_admin)])
+@core_app.get(
+    "/admin/api/v1/audit",
+    name="Audit",
+    description="show the current balance of the node and the LNbits database",
+    dependencies=[Depends(check_admin)],
+)
 async def api_auditor():
     try:
         delta, node_balance, total_balance = await get_balance_delta()
