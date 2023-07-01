@@ -37,6 +37,7 @@ node_modules
 lnbits/static/bundle.js
 lnbits/static/bundle.css
 docker
+clients
 
 # Nix
 *result*
