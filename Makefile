@@ -111,6 +111,7 @@ pre-commit:
 	poetry run pre-commit run --all-files
 
 create-clients:
+	LNBITS_EXTENSIONS_DEFAULT_INSTALL="" \
 	LNBITS_TITLE="lnbits client" \
 	LNBITS_BACKEND_WALLET_CLASS="FakeWallet" \
 	LNBITS_DATA_FOLDER="./tests/data" \
@@ -124,11 +125,12 @@ create-clients:
 	mkdir -p clients/java
 	mkdir -p clients/python
 	mkdir -p clients/rust
-	curl -s http://0.0.0.0:5004/openapi.json >> clients/openapi.json
+	curl -s http://0.0.0.0:5004/openapi.json > clients/openapi.json
 	npx openapi-generator-cli generate -i clients/openapi.json -g javascript -o clients/js
 	npx openapi-generator-cli generate -i clients/openapi.json -g java -o clients/java
 	npx openapi-generator-cli generate -i clients/openapi.json -g python -o clients/python
 	npx openapi-generator-cli generate -i clients/openapi.json -g rust -o clients/rust
+	killall python
 
 sync-clients:
 	sh tools/sync_clients.sh
