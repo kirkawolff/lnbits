@@ -121,15 +121,17 @@ create-clients:
 	poetry run lnbits &
 	sleep 7
 	rm -rf clients
-	mkdir -p clients/js
-	mkdir -p clients/java
-	mkdir -p clients/python
-	mkdir -p clients/rust
+	mkdir -p clients/browser
+	mkdir -p clients/node
+	# mkdir -p clients/java
+	# mkdir -p clients/python
+	# mkdir -p clients/rust
 	curl -s http://0.0.0.0:5004/openapi.json > clients/openapi.json
-	npx openapi-generator-cli generate -i clients/openapi.json -g javascript -o clients/js
-	npx openapi-generator-cli generate -i clients/openapi.json -g java -o clients/java
-	npx openapi-generator-cli generate -i clients/openapi.json -g python -o clients/python
-	npx openapi-generator-cli generate -i clients/openapi.json -g rust -o clients/rust
+	npx openapi-generator-cli generate -i clients/openapi.json -g typescript-fetch -o clients/browser --additional-properties=npmName=@lnbits/client-browser,supportsES6=true,withInterfaces=true
+	npx openapi-generator-cli generate -i clients/openapi.json -g typescript-node -o clients/node --additional-properties=npmName=@lnbits/client,supportsES6=true,withInterfaces=true
+	# npx openapi-generator-cli generate -i clients/openapi.json -g java -o clients/java
+	# npx openapi-generator-cli generate -i clients/openapi.json -g python -o clients/python
+	# npx openapi-generator-cli generate -i clients/openapi.json -g rust -o clients/rust
 	killall python
 
 sync-clients:
