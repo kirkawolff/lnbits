@@ -110,7 +110,7 @@ async def pay_invoice(
     payment_request: str,
     max_sat: Optional[int] = None,
     extra: Optional[Dict] = None,
-    description: str = "",
+    description: str = None,
     conn: Optional[Connection] = None,
 ) -> str:
     """
