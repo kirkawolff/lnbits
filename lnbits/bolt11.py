@@ -20,6 +20,9 @@ class Route(NamedTuple):
 
 
 class Invoice:
+    def __str__(self):
+        return f"Invoice: payment_hash:{self.payment_hash}, amount_msat:{self.amount_msat}, description:{self.description}, description_hash:{self.description_hash}, payee:{self.payee}, date:{self.date}, expiry:{self.expiry}, secret:{self.secret}, route_hints:{self.route_hints}, min_final_cltv_expiry:{self.min_final_cltv_expiry}"
+
     payment_hash: str
     amount_msat: int = 0
     description: Optional[str] = None

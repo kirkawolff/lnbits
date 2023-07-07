@@ -88,6 +88,8 @@ async def create_invoice(
 
     invoice = bolt11.decode(payment_request)
 
+    logger.info(f"create_invoice( wallet_id:{wallet_id}, amount:{amount}, memo:{memo}, description_hash:{description_hash}, unhashed_description:{unhashed_description}, expiry:{expiry}, extra:{extra}, webhook:{webhook}, internal:{internal}, conn:{conn}), payment_request(invoice):{invoice}")
+
     amount_msat = amount * 1000
     await create_payment(
         wallet_id=wallet_id,
@@ -133,6 +135,8 @@ async def pay_invoice(
         if max_sat and invoice.amount_msat > max_sat * 1000:
             raise ValueError("Amount in invoice is too high.")
 
+        logger.info(f"pay_invoice: description: {description}, invoice: {invoice}, extra: {extra}")
+
         # put all parameters that don't change here
         class PaymentKwargs(TypedDict):
             wallet_id: str
@@ -147,7 +151,7 @@ async def pay_invoice(
             payment_request=payment_request,
             payment_hash=invoice.payment_hash,
             amount=-invoice.amount_msat,
-            memo=description or invoice.description or "",
+            memo=description or invoice.description or "no description",
             extra=extra,
         )
 
