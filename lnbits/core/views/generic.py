@@ -33,7 +33,7 @@ from ..crud import (
     update_installed_extension_state,
     update_user_extension,
 )
-from ..services import pay_invoice, redeem_lnurl_withdraw
+from ..services import pay_invoice, redeem_lnurl_withdraw, update_wallet_balance
 
 core_html_routes: APIRouter = APIRouter(tags=["Core NON-API Website Routes"])
 
@@ -298,6 +298,8 @@ async def deletewallet(wal: str = Query(...), usr: str = Query(...)):
     if wal not in user_wallet_ids:
         raise HTTPException(HTTPStatus.FORBIDDEN, "Not your wallet.")
     else:
+        #await update_wallet_balance(wallet_id=wal, amount=int(-1 * remaining_balance))
+
         await delete_wallet(user_id=user.id, wallet_id=wal)
         user_wallet_ids.remove(wal)
         logger.debug("Deleted wallet {wal} of user {user.id}")
