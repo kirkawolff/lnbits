@@ -244,17 +244,17 @@
           <q-toolbar-title class="text-caption">
             {{ SITE_TITLE }}, {{SITE_TAGLINE}}
             <br />
-            <!-- small
+            <small
               >{% raw %}{{ $t('lnbits_version') }}{% endraw %}:
               {{LNBITS_VERSION}},
             </small>
             <small
               >{% raw %}{{ $t('commit_version') }}{% endraw %}:
               {{COMMIT_VERSION}}</small
-            -->
+            >
           </q-toolbar-title>
           <q-space></q-space>
-          <!-- q-btn
+          <q-btn
             flat
             dense
             :color="($q.dark.isActive) ? 'white' : 'primary'"
@@ -277,7 +277,7 @@
             href="https://github.com/lnbits/lnbits"
             target="_blank"
             rel="noopener"
-          -->
+          >
             <q-tooltip>{% raw %}{{ $t('view_github') }}{% endraw %}</q-tooltip>
           </q-btn>
         </q-toolbar>
